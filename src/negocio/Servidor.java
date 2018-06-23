@@ -2,11 +2,17 @@
 /*
  * Classe servidor contem os controladores
  */
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+
 public class Servidor implements IServidor {
 	private ControladorUsuario medicos;
 	private ControladorUsuario pacientes;
 	private ControladorUsuario recepcionistas;
 	private ControladorConsulta consultas;
+	private ControladorConsulta exames;
+	private ControladorConsulta cirurgias;
 	private GetInformation leitor;
 	private static Servidor instance;
 	
@@ -15,6 +21,8 @@ public class Servidor implements IServidor {
 		pacientes = new ControladorUsuario();
 		recepcionistas = new ControladorUsuario();
 		consultas = new ControladorConsulta();
+		exames = new ControladorConsulta();
+		cirurgias = new ControladorConsulta();
 		leitor = GetInformation.getInstance();
 		
 		/*
@@ -40,12 +48,10 @@ public class Servidor implements IServidor {
 	public Usuario efetuarLogin() {
 		Usuario u;
 		String id = leitor.lerId();
-		System.out.println(id);
-		System.out.println(id.charAt(0));
-		
-		if(id.charAt(0) == 1) {
+				
+		if(id.charAt(0) == '1') {
 			u = efetuarLoginRecepcionista(id);
-		} else if(id.charAt(0) == 2) {
+		} else if(id.charAt(0) == '2') {
 			u = efetuarLoginMedico(id);
 		} else {
 			u = efetuarLoginPaciente(id);
@@ -55,12 +61,6 @@ public class Servidor implements IServidor {
 	public Recepcionista efetuarLoginRecepcionista(String id) {
 		
 		Recepcionista r = (Recepcionista) recepcionistas.procurar(id);
-		if(recepcionistas.existe(id)) {
-			System.out.println(true);
-		} else {
-			System.out.println("Erro macabro");
-			System.out.println(false);
-		}
 		if(r == null) {
 			System.out.println("Identificação errada");
 			return null;
@@ -76,17 +76,17 @@ public class Servidor implements IServidor {
 	
 	public Paciente efetuarLoginPaciente(String id) {
 		
-		Paciente r = (Paciente) pacientes.procurar(id);
-		if(r == null) {
+		Paciente p = (Paciente) pacientes.procurar(id);
+		if(p == null) {
 			System.out.println("Identificação errada");
 			return null;
 		}
 		System.out.println("Senha:");
-		if(leitor.lerSenha().hashCode() != r.getSenhaHash()) {
+		if(leitor.lerSenha().hashCode() != p.getSenhaHash()) {
 			System.out.println("Senha errada");
 			return null;
 		}else {
-			return r;
+			return p;
 		}
 	}
 	
@@ -109,7 +109,13 @@ public class Servidor implements IServidor {
 	@Override
 	public void cadastrarUsuario() {
 		Usuario u = leitor.lerUsuarioCadastro();
-		pacientes.cadastrar(u);
+		if(u instanceof Recepcionista) {
+			recepcionistas.cadastrar(u);
+		} else if(u instanceof Medico) {
+			medicos.cadastrar(u);
+		} else {
+			pacientes.cadastrar(u);
+		}
 	}
 
 	@Override
@@ -131,9 +137,8 @@ public class Servidor implements IServidor {
 	}
 
 	@Override
-	public void descadastrarConsulta() {
-		// TODO Auto-generated method stub
-
+	public void descadastrarConsulta(String id) {
+		consultas.descadrastar(id);
 	}
 
 	@Override
@@ -160,4 +165,19 @@ public class Servidor implements IServidor {
 		return (Recepcionista) recepcionistas.procurar(leitor.lerId());
 	}
 	
+	public ArrayList<Consulta> procurarConsulta() {
+		return consultas.procurar(leitor.lerData());
+	}
+	
+	public Consulta procurarConsulta(String id) {
+		return consultas.procurar(id);
+	}
+	
+	public Exame procurarExame(String id) {
+		return (Exame) exames.procurar(id);
+	}
+	
+	public Cirurgia procurarCirurgia(String id) {
+		return (Cirurgia) cirurgias.procurar(id);
+	}
 }

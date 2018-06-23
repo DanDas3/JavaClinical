@@ -1,5 +1,7 @@
 ﻿package negocio;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import dados.RepositorioUsuario;;
@@ -54,24 +56,40 @@ public class GetInformation {
 	}*/
 	
 	public Usuario lerUsuarioCadastro() {
-		Usuario u= new Usuario();
-		
+		Usuario u;
+		int tipo;
 		System.out.println("Digite o numero do tipo de Usuario:\n1 - Recepcionista\n2 - Médico\n3 - Paciente");
-		u.setId(Id.gerarId(n.nextInt()));
-		System.out.println("Digite o nome do Usuario: ");		
+		tipo = n.nextInt();
+		if(tipo == 1) {
+			u = new Recepcionista();
+		} else if(tipo == 2) {
+			u = new Medico();
+		} else {
+			u = new Paciente();
+		}
+		u.setId(Id.gerarId(tipo));
+		n.nextLine();
+		System.out.println("Digite o nome do Usuario: ");
 		u.setNome(n.nextLine());
 		
 		System.out.println("Digite o cpf do Usuario: ");
 		u.setCpf(n.nextLine());
 		
-		System.out.println("crie uma senha: ");
+		System.out.println("Crie uma senha: ");
 		String senha = n.nextLine();
 		u.setSenhaHash(senha.hashCode());
-
-		
-		/*ControladorUsuario b= new ControladorUsuario();
-		b.cadastrar(u);*/
 		return u;
+	}
+	
+	public LocalDate lerData() {
+		int dia;
+		int mes;
+		int ano;
+		dia=n.nextInt();
+		mes=n.nextInt();
+		ano=n.nextInt();
+		LocalDate d= LocalDate.of(ano, mes, dia);
+		return d;
 	}
 	
 	public String lerId() {
@@ -103,6 +121,11 @@ public class GetInformation {
 		}
 		return c;
 				
+	}
+	
+	public LocalDate procurarConsulta() {
+		LocalDate d= this.lerData();
+		return d;
 	}
 
 	public String lerSenha() {
