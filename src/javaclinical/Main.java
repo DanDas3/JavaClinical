@@ -1,3 +1,4 @@
+package javaclinical;
 import java.time.LocalDate;
 
 import gui.TelaTextual;
@@ -6,10 +7,11 @@ import negocio.Paciente;
 import negocio.Recepcionista;
 import negocio.Usuario;
 
-public class MainTeste2 {
+public class Main {
 
 	public static void main(String[] args) {
 		Usuario u;
+		   
 		TelaTextual tt = new TelaTextual();
 		// Cria a tela
 		while(tt.executando()) {
@@ -33,31 +35,38 @@ public class MainTeste2 {
 										tt.cadastrar();
 										break;
 									case 2:
-										tt.procurarPaciente();
+										Paciente p = tt.procurarPaciente();
+										System.out.println(p);
 										break;
 									case 3:
-										tt.procurarMedico();
+										Medico m = tt.procurarMedico();
+										System.out.println(m);
 										break;
 									case 4:
 									tt.removerUsuario();
 										break;
+									case 5:
+										
+										break;
 									}
 								} while (tt.getOpcao() != 0);
 							} else if (u instanceof Medico) {
-								tt.exibeMenuMedico();
-								tt.lerOpcao();
-								switch(tt.getOpcao()) {
-								case 1:
-									tt.procurarConsulta();
-									break;
-								case 2:
-									
-									break;
-									case 3:
-										break;
-								}
-								}while(tt.getOpcao() != 0);
-							} else if (u instanceof Paciente) {
+                                do {
+								    tt.exibeMenuMedico();
+								    tt.lerOpcao();
+								    switch(tt.getOpcao()) {
+								    case 1:
+									    tt.procurarConsulta();
+									    break;
+								    case 2:
+									    
+									    break;
+									    case 3:
+										    break;
+								    }
+                                } while(tt.getOpcao() != 0);
+							}
+							else if (u instanceof Paciente) {
 								do {
 									tt.exibeMenuPaciente();
 									tt.lerOpcao();
@@ -81,14 +90,15 @@ public class MainTeste2 {
 										break;
 									}
 								}while(tt.getOpcao() != 0);
-						} else {
-							tt.exibirMenuLoginOpcao();
-							tt.lerOpcao();
-							if(tt.getOpcao() == 0) {
-								tt.setContinuarLogin(false);
-							} else {
+						    } else {
+							    tt.exibirMenuLoginOpcao();
+							    tt.lerOpcao();
+							    if(tt.getOpcao() == 0) {
+								    tt.setContinuarLogin(false);
+							    } else {
 								tt.setContinuarLogin(true);
-							}
+							    }
+                            }
 						}
 					}while(u != null && tt.isContinuarLogin());
 					tt.setOpcao(-1); // Setar o valor opção com o valor do menu anterior

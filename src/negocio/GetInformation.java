@@ -82,13 +82,14 @@ public class GetInformation {
 	}
 	
 	public LocalDate lerData() {
+		System.out.println("Insira um dia para verificar as consultas marcadas (dd/mm/aaaa):");
 		int dia;
 		int mes;
 		int ano;
 		dia=n.nextInt();
 		mes=n.nextInt();
 		ano=n.nextInt();
-		LocalDate d= LocalDate.of(ano, mes, dia);
+		LocalDate d = LocalDate.of(ano, mes, dia);
 		return d;
 	}
 	
@@ -97,8 +98,9 @@ public class GetInformation {
 		return n.nextLine();
 	}
 	
+	
 	public Consulta lerConsulta(Servidor s) {
-		Consulta c = new Consulta();
+		Consulta c = new Exame();
 		Medico m;
 		Paciente p;
 		System.out.println("Digite a id do médico: ");
@@ -115,13 +117,14 @@ public class GetInformation {
 				}else {
 					c.setPaciente(p);
 					c.setProntuario(new Prontuario());
-					
 				}
 				
 		}
 		return c;
-				
 	}
+	
+	
+	
 	
 	public LocalDate procurarConsulta() {
 		LocalDate d= this.lerData();
