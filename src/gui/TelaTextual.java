@@ -35,13 +35,10 @@ public class TelaTextual {
     public TelaTextual() {
         executando = true;
         continuarLogin = false;
-        try {
+        
             s = Servidor.getInstance();
-        } catch (UsuarioExisteException e) {
-            System.out.println(e.getMessage());
-        } catch (UsuarioNullException e) {
-            System.out.println(e.getMessage());
-        }
+        
+        
         try {
             s.carregarDados();
         } catch (IOException ex) {
@@ -49,6 +46,7 @@ public class TelaTextual {
         } catch (ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
+        
         leitor = GetInformation.getInstance();
         opcao = -1;
         sc = new Scanner(System.in);
