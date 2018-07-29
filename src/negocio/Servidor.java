@@ -23,7 +23,7 @@ public class Servidor implements IServidor {
     //private GetInformation leitor;
     private static Servidor instance;
 
-    private Servidor() throws UsuarioExisteException, UsuarioNullException {
+    private Servidor() {
         medicos = new ControladorUsuario("medicos.txt");
         pacientes = new ControladorUsuario("pacientes.txt");
         recepcionistas = new ControladorUsuario("recepcionistas.txt");
@@ -42,10 +42,16 @@ public class Servidor implements IServidor {
         r.setSenhaHash("admin".hashCode());
         r.setId("1111");
         r.setCpf("");
-        recepcionistas.cadastrar(r);
+        try {
+            recepcionistas.cadastrar(r);
+        } catch (UsuarioExisteException ex) {
+            System.out.println(ex.getMessage());
+        } catch (UsuarioNullException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
-    public static Servidor getInstance() throws UsuarioExisteException, UsuarioNullException {
+    public static Servidor getInstance() {
         if (instance == null) {
             instance = new Servidor();
         }

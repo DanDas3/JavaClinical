@@ -49,6 +49,7 @@ public class FXMLTelaInicialController implements Initializable {
     @FXML private Button btVoltar;
     // TODO @author Danilo Araujo Comentar para usar Main principal
     TelaDoInicial gui = new TelaDoInicial();
+    private Servidor s;
     
     
     private Parent root;
@@ -65,17 +66,18 @@ public class FXMLTelaInicialController implements Initializable {
         
         String senha = SenhaField.getText();
         System.out.println(senha);
-        
+        s = Servidor.getInstance();
         /*
          * Tentativa de pegar os dados do servidor
          * @author Danilo Araújo
          */
-        /*Login l = new Login(id,senha.hashCode());
+        Login l = new Login(id,senha.hashCode());
         switch (l.getId().charAt(0)) {
             case '1':
          {
              try {
                  u = Servidor.getInstance().efetuarLoginRecepcionista(l);
+                 System.out.println(u);
              } catch (UsuarioNullException ex) {
                  System.out.println(ex.getMessage());
              }
@@ -85,6 +87,7 @@ public class FXMLTelaInicialController implements Initializable {
          {
              try {
                  u = Servidor.getInstance().efetuarLoginMedico(l);
+                 System.out.println(u);
              } catch (UsuarioNullException ex) {
                  System.out.println(ex.getMessage());
              }
@@ -94,12 +97,13 @@ public class FXMLTelaInicialController implements Initializable {
          {
              try {
                  u = Servidor.getInstance().efetuarLoginPaciente(l);
+                 System.out.println(u);
              } catch (UsuarioNullException ex) {
                  System.out.println(ex.getMessage());
              }
          }
                 break;
-        }*/
+        }
        
     }
     

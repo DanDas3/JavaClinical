@@ -18,19 +18,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import negocio.Recepcionista;
 
 /**
  * FXML Controller class
  *
  * @author HENRIQUE.FELIX
  */
-public class FXMLTelaRecepcaoController implements Initializable {
-    TelaDoInicial gui = new TelaDoInicial();
-    /**
-     * Initializes the controller class.
-     */
-    
-    public class FXMLTelaInicialController {
+public class FXMLTelaRecepcaoController {
 
     @FXML
     private Button btCadastroUsuario;
@@ -55,32 +50,17 @@ public class FXMLTelaRecepcaoController implements Initializable {
 
     @FXML
     private Label label1;
-        
-    private Object root;
+    
+    private Recepcionista r;
 
     @FXML
     void BotaoVoltar(ActionEvent event) {
-        gui.trocaCena(0);
+        //TelaDoInicial.;
     }
 
     @FXML
-    private void botaoCadastroUsu(ActionEvent event) {
-        System.out.println("Abrindo tela de cadastro de usuarios...");
-        gui.trocaCena(2);
-        /*try {
-            this.root = FXMLLoader.load(getClass().getResource("../gui/guifx/FXMLCadstraUsusarios.fxml"));
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLCadastraUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-                TelaDoInicial.getStage().setScene(new Scene((Parent) root));
+    void botaoCadastroUsuario(ActionEvent event) {
+
     }
 
-}
-
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
 }
