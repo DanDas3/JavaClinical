@@ -69,7 +69,7 @@ public class TelaTextual {
     }
 
     public void exibeMenuRecepcionista() {
-        System.out.println("Menu Recepção\n1 - Cadrastar usuario\n2 - Buscar paciente\n3 - Buscar medico \n4 - Remover usuario \n5 - Marcar consulta\n6 - Marcar exame \n7 - Exibir lista de Recepcionistas cadastrados\n8 - Exibir lista de Médicos cadastrados\n9 - Exibir lista de Pacientes cadastrados\n0 - Sair");
+        System.out.println("Menu Recepção\n1 - Cadrastar usuario\n2 - Buscar paciente\n3 - Buscar medico \n4 - Remover usuario \n5 - Marcar consulta\n6 - Marcar exame \n7 - Exibir lista de Recepcionistas cadastrados\n8 - Exibir lista de Médicos cadastrados\n9 - Exibir lista de Pacientes cadastrados\n10 - Exibir as consultas do dia\n0 - Sair");
 
     }
 
@@ -198,10 +198,11 @@ public class TelaTextual {
         this.continuarLogin = continuarLogin;
     }
 
-    public void exibirConsulta(String id) {
-        Consulta c = s.procurarConsulta(id);
+    public void exibirConsulta(String id, LocalDate data) {
+        Consulta c = s.procurarConsulta(id, data);
         System.out.println(c);
     }
+    
 
     /*
 	public void exibirExame(String id) {
@@ -249,9 +250,16 @@ public class TelaTextual {
         }
 
     }
+    
+    public ArrayList<Consulta> exibirConsultasDia(LocalDate d) {
+        return s.procurarConsultasDia(d);
+    }
 
     public void executarOperacoes() {
         Usuario u = null;
+        Consulta c = null;
+        String id = null; // @author Danilo Araújo Variável que irá guardar a ID do paciente na conulta
+                   // Solução temporária
         switch (this.getOpcao()) {
             case -1: // Menu inicial
                 this.exibirMenuInicial(); // Exibindo o menu da recep��o s� para teste
@@ -288,6 +296,7 @@ public class TelaTextual {
                                             case 3:
                                                 Medico m;
                                                 try {
+                                                    System.out.println("Insira a ID");
                                                     m = this.procurarMedico();
                                                     System.out.println(m);
                                                 } catch (UsuarioNullException e) {
@@ -316,6 +325,8 @@ public class TelaTextual {
                                             case 9:
                                                 System.out.println(s.getDadosRepositorioPacientes());
                                                 break;
+                                            case 10:
+                                                System.out.println(s.procurarConsultasDia(LocalDate.now()));
                                         }
                                     } while (this.getOpcao() != 0);
                                 } else if (u instanceof Medico) {
@@ -327,6 +338,9 @@ public class TelaTextual {
                                                 this.procurarConsulta();
                                                 break;
                                             case 2:
+                                                System.out.println("Insira a ID do paciente");
+                                                id = leitor.lerId();
+                                                this.gerarProntuario(id);
                                                 break;
                                             case 3:
                                                 break;
@@ -338,7 +352,8 @@ public class TelaTextual {
                                         this.lerOpcao();
                                         switch (this.getOpcao()) {
                                             case 1:
-                                                this.exibirConsulta(u.getId());
+                                                System.out.println("Insira a data da consulta");
+                                                this.exibirConsulta(u.getId(),leitor.lerData());
                                                 break;
                                             case 2:
                                                 //this.exibirExame(u.getId());
@@ -379,8 +394,13 @@ public class TelaTextual {
 
             default:
                 this.sair();
+                
                 break;
         }
+    }
+
+    public String gerarProntuario(String id) {
+        return s.gerarProntuario(id);
     }
 
 }

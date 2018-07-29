@@ -24,15 +24,15 @@ import negocio.IServidor;
 public class TelaDoInicial extends Application {
     
     private static Stage stage;
-    private static ArrayList<Scene> cenas = new ArrayList<Scene>();
+    private static final ArrayList<Scene> cenas = new ArrayList<Scene>();
     
     
     @Override
     public void start(Stage stagePrimare) throws Exception {
         stage =  stagePrimare;
-        criaCena("FXMLTelaInicial.fxml");
-        criaCena("FXMLTelaRecepcao.fxml");
-//        criaCena("FXMLCadastraUsuarios.fxml");
+        criaCena("FXMLTelaInicial.fxml");//0
+        //criaCena("FXMLTelaRecepcao.fxml");
+        //criaCena("FXMLCadastraUsuarios.fxml");
         stage.setScene(cenas.get(0));
         stage.setTitle("JavaClinical");
         stage.show();
