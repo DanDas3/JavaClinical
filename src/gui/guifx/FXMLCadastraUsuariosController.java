@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.guifx.novaTela;
+package gui.guifx;
 
-import gui.guifx.TelaDoInicial;
+//import gui.guifx.TelaDoInicial; // TODO @author Danilo Araújo
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -13,7 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javax.xml.soap.Text;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -29,13 +29,15 @@ public class FXMLCadastraUsuariosController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
-    TelaDoInicial gui = new TelaDoInicial();
+    MainFx gui = new MainFx(); // TODO @author Danilo Araújo
     private Parent root;
     
     
-     @FXML
+    @FXML
     private Button btCadastrarRecp;
+    
+     @FXML
+    private Button btVoltar;
 
     @FXML
     private Button btCadastrarMed;
@@ -44,22 +46,27 @@ public class FXMLCadastraUsuariosController implements Initializable {
     private Button btCadastroPac;
 
     @FXML
-    private Text titulo;
+    private Label label2;
 
     @FXML
     void botaoCadastroMed(ActionEvent event) {
-
+        this.gui.trocaCena(5);
     }
 
     @FXML
     void botaoCadastroPac(ActionEvent event) {
-
+        this.gui.trocaCena(7);
     }
 
     @FXML
     void botaoRecp(ActionEvent event) {
-
+        this.gui.trocaCena(6);
     }
+    @FXML
+    void botaoVoltar(ActionEvent event){
+        MainFx.trocaCena(0);
+    }
+        
     
     
 

@@ -24,12 +24,13 @@ import negocio.Usuario;
  * TODO @author Danilo Araújo Descomentar tudo o que tem haver(português correto?)
  * com JavaFX para poder testar a GUI
  */
-public class Main/*extends Application*/ {
+public class Main /*extends Application*/ {
 
     /*private static Stage stage;
     private static ArrayList<Scene> cenas = new ArrayList<Scene>();*/
 
     public static void main(String[] args) {
+        
         
         TelaTextual tt = new TelaTextual(); // TODO Remover o bloco de comentários para testar em TelaTextual
         // Cria a tela
@@ -45,8 +46,9 @@ public class Main/*extends Application*/ {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
         stage =  primaryStage;
-        criaCena("../gui/guifx/FXMLTelaInicial.fxml");
-        criaCena("../gui/guifx/FXMLTelaRecepcao.fxml");
+        criaCena("/TelaDoZero.fxml");
+        //criaCena("../gui/guifx/FXMLTelaInicial.fxml");
+        //criaCena("../gui/guifx/FXMLTelaRecepcao.fxml");
         //criaCena("FXMLCadastraUsuarios.fxml");
         stage.setScene(cenas.get(0));
         stage.setTitle("JavaClinical");

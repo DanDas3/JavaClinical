@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-import dados.RepositorioUsuario;import excecao.UsuarioNullException;
+import dados.RepositorioUsuario;
+import excecao.UsuarioNullException;
 ;
 
 // A classe basicamente tem os métodos que pegam as informações para jogar nos controladores de consultas e pacientes.
@@ -20,6 +21,8 @@ import dados.RepositorioUsuario;import excecao.UsuarioNullException;
 public class GetInformation {
 	static Scanner n;
 	private static GetInformation instance;
+        
+     
 	
 	/*
 	 * Construtor privado
@@ -92,6 +95,7 @@ public class GetInformation {
 	}
 	
 	public String lerId() {
+                System.out.println("Digite o ID: ");
 		String id = n.nextLine();
 		return id;
 	}
@@ -140,11 +144,15 @@ public class GetInformation {
 	public String lerSenha() {
 		return n.nextLine();
 	}
+        
 	
 	public Exame lerExame() {
 		Exame e = new Exame();
-		System.out.println("Digite o seu ID: ");
-		//ver depois como fazer tudo pelo ID
+                n.nextLine();
+		System.out.println("Digite o  seu Id: ");
+                e.setIdPaciente(n.nextLine());
+                e.setIdExame(Id.gerarId(4));
+		//ver depois como fazer tudo pelo ID   //feito +- ass: Darllan Gomes
 		System.out.println("Digite o nome do paciente: ");
 		e.setNomePaciente(n.nextLine());
 		System.out.println("Digite o nome do Médico solicitante: ");
@@ -153,6 +161,6 @@ public class GetInformation {
 		e.setTipoExame(n.nextLine());
 		System.out.println("Digite a data da Consulta: \n");
 		e.setData(lerData());
-		return e;
+		return e;                    
 	}
 }

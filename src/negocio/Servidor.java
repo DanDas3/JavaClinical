@@ -1,5 +1,6 @@
 package negocio;
 
+import excecao.ExameInexistenteException;
 import java.io.FileNotFoundException;
 import excecao.UsuarioExisteException;
 import excecao.UsuarioNullException;
@@ -200,6 +201,7 @@ public class Servidor implements IServidor {
     public Cirurgia procurarCirurgia(String id) {
         return (Cirurgia) cirurgias.procurar(id);
     }
+   
 
     public void marcarExame(Exame e) {
         //e= leitor.lerConsulta(instance);
@@ -222,11 +224,21 @@ public class Servidor implements IServidor {
     }
 
     public void carregarDados() throws IOException, FileNotFoundException, ClassNotFoundException {
-        /*consultas.carregarDados("consultas.txt");
+        consultas.carregarDados("consultas.txt");
         exames.carregarDados("exames.txt");
         pacientes.carregarDados("pacientes.txt");
         medicos.carregarDados("medicos.txt");
-        recepcionistas.carregarDados("recepcionistas.txt");*/
+        recepcionistas.carregarDados("recepcionistas.txt");
     }
+    
+    public ArrayList<Exame> procurar(LocalDate d){
+      return exames.procurar(d);
+    }
+    public Exame procurar(Exame e) throws ExameInexistenteException{
+      return exames.procurar(e);
+    }
+        
+    
+   
 
 }

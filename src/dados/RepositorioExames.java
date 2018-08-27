@@ -34,23 +34,48 @@ public class RepositorioExames {
         }
     }
     
+    //criar uma outra assinatura que Retorne um array de exames caso seja necessário listar os exames de um paciente.
+    //Ass: Darllan Gomes.
+    
+    public Exame procurar(String id) throws ExameInexistenteException {
+        int i = 0;
+        Exame get = null;
+        boolean continuar = true;
+        for (i = 0; i < exames.size() && continuar == true; i++) {
+            
+            if (exames.get(i).getIdExame().equals(id)) {
+                get = exames.get(i);
+                continuar = false;
+            }
+        }
+        
+        if (exames.get(i) == null) {
+            throw new ExameInexistenteException();
+        }
+        return get;
+    }
+    
+    
     public Exame procurar(Exame e) throws ExameInexistenteException {
         int i = 0;
         Exame get = null;
         boolean continuar = true;
         for (i = 0; i < exames.size() && continuar == true; i++) {
             
-            if (exames.get(i).equals(e)) {
+            if (exames.get(i).getConsulta().getPaciente().getNome().equals(e.getNomePaciente())) {
                 get = exames.get(i);
                 continuar = false;
             }
         }
         
-        if (e == null) {
+        if (exames.get(i) == null) {
             throw new ExameInexistenteException();
         }
         return get;
     }
+    
+    
+    
     
     public ArrayList<Exame> procurar(LocalDate d) {
         ArrayList<Exame> listaExames = new ArrayList<Exame>();
@@ -63,6 +88,8 @@ public class RepositorioExames {
         
         return listaExames;
     }
+    
+     
     
     /*public boolean existe(String id) {
         boolean existe = false;
